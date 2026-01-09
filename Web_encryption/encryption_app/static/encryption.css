@@ -1,0 +1,94 @@
+header {
+    background: linear-gradient(45deg, orange 30%, violet);
+    background-image: url('fon.jpeg');
+    height: 30rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.ki-header-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ki-text-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+
+.roboto-italic {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
+.overlay {
+    min-height: 100%;
+    height: 100%;
+    min-width: 100%;
+    background: rgba(0, 0, 0, 0.50);
+}
+
+/* Мобильная версия */
+@media screen and (max-width: 600px) {
+    header {
+        height: 15rem;
+    }
+
+    interesting-text {}
+
+    interesting-title {}
+}
+.auth {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    width: 20rem;
+    align-items: center;
+
+}
+
+body {
+    background: #000000;
+    color: #000000;
+}
+
+#pole {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    width: 20rem;
+    align-items: center;
+    background-color: black;
+}
+
+#nav-login {
+    background-color: black;
+}
+
+obsh {
+    align-items: center;
+}
+
+p {
+    color: #ffffff;
+}
+
+.btn:hover {
+    text-decoration: underline
+}
+
+.btn:active {
+    color: coral
+}
+
+.btn{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
