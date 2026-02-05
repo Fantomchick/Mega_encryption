@@ -1,0 +1,57 @@
+.auth {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    width: 20rem;
+    align-items: center;
+
+}
+
+body {
+    background: #000000;
+    color: #000000;
+}
+
+#pole {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    width: 20rem;
+    align-items: center;
+    background-color: black;
+}
+
+#nav-login {
+    background-color: black;
+}
+
+#obsh {
+    align-items: center;
+}
+
+p {
+    color: #ffffff;
+}
+
+#reg-link:hover {
+    text-decoration: underline
+}
+
+#reg-link:active {
+    color: coral
+}
+
+#reg-link {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+    header {
+        height: 15rem;
+    }
+
+    interesting-text {}
+
+    interesting-title {}
+}

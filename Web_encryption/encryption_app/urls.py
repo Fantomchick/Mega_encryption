@@ -4,4 +4,6 @@ from . import views
 #добавил привязку к идексу
 urlpatterns= [
     path('',views.index,name='index'),
+    path('reg/',views.reg,name='reg'),\
+    path('logout/',views.logout_view,name='logout'),        
 ]

@@ -1,6 +1,6 @@
 header {
     background: linear-gradient(45deg, orange 30%, violet);
-    background-image: url('fon.jpeg');
+    background-image: url('../fon.jpeg');
     height: 30rem;
     background-repeat: no-repeat;
     background-size: cover;
@@ -17,7 +17,6 @@ header {
     font-size: 1.5rem;
     font-weight: 600;
 }
-
 
 .roboto-italic {
     font-family: "Roboto", sans-serif;
@@ -40,7 +39,6 @@ header {
     header {
         height: 15rem;
     }
-
     interesting-text {}
 
     interesting-title {}
@@ -78,17 +76,4 @@ obsh {
 
 p {
     color: #ffffff;
-}
-
-.btn:hover {
-    text-decoration: underline
-}
-
-.btn:active {
-    color: coral
-}
-
-.btn{
-    color: rgb(255, 255, 255);
-    text-decoration: none;
 }
