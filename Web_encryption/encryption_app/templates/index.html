@@ -11,35 +11,19 @@
 </head>
 <body class="bg-dark">
     {% csrf_token %}
-    <!--Панель навигации  -->
-    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-        <div class="container-fluid ">
-            <a class="navbar-brand " href="#">
-                <img src={%static 'faicon.png' %} id="img1" width="30" height="30" class="d-inline-block align-top" alt="not found"
-                            loading="lazy"></img>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarWithDropdown"
-                aria-controls="navbarWithDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-
-            <div class="collapse navbar-collapse" id="navbarWithDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        {%if username %}
-                        <a class="nav-link dropdown-toggle bg-dark" href='' data-bs-toggle="dropdown">{{username}}</a>
-                        <ul class="dropdown-menu bg-dark">
-                            <li><a class="dropdown-item text-white " id='logout-link' href={%url 'logout'%}>Выйти</a></li>
-                        </ul>
-                        {%else%}
-                        <a class="nav-link" href={% url 'reg' %} tabindex="-1" aria-disabled="true">Зарегистрироваться</a>
-                        {%endif%}
-                    </li>
-                </ul>
-            </div>
+    <div id="nav">
+        <div>
+            {%if username %}
+            <a class="nav-link dropdown-toggle " href='' data-bs-toggle="dropdown">{{username}}</a>
+            <ul class="dropdown-menu bg-dark">
+                <li><a class="dropdown-item text-white " id='logout-link' href={%url 'logout' %}>Выйти</a></li>
+            </ul>
+            {%else%}
+            <a class="nav-link" href={% url 'reg' %} tabindex="-1" aria-disabled="true">Создать аккаунт</a>
+            {%endif%}
         </div>
-    </nav>
+    </div>
+
     <!--Заголовок-->
     <header>
         <div class="container text-white pt-5 roboto-italic overlay">
@@ -49,19 +33,20 @@
     </header>
     
     <div class="container text-white bg-dark">
+        
         <div class="row justify-content-center">
             <div class="col-sm-6">
                 <div class="row d-flex justify-content-center">
-                    <h2 id="zagalovok">Шифроваться</h2>
+                    <h2 id="zagalovok" class="row d-flex justify-content-center" >Шифроваться</h2>
                     <br>
-                    <label for='nickname' class='form-label' id='cryptographer-text'><h5>Выберете файл, который вы хотите зашифровать</h5></label>
+                    <label for='nickname' class='form-label' id='cryptographer-text'><h5 class="row d-flex justify-content-center">Выберете файл, который вы хотите зашифровать</h5></label>
                     <input type="file" class='form-control ' id='cryptographer'>
                     <input type="button" class='btn btn-dark' id='cryptographer-btn' value='Шифровать'>
                     <br>
-                    <h2 id="zagalovok">Дешифроваться</h2>
+                    <h2 id="zagalovok" class="row d-flex justify-content-center">Дешифроваться</h2>
                     <br>
-                    <label for='nickname' class='form-label' id='codebreaker-text'><h5>Выберете файл, который хотите дешифровать</h5></label>
-                    <input type="file" class='form-control ' id='codebreaker'>
+                    <label for='nickname' class='form-label' id='codebreaker-text'><h5 class="row d-flex justify-content-center">Выберете файл, который хотите дешифровать</h5></label>
+                    <input type="file" class='form-control' id='codebreaker'>
                     <input type="button" class='btn btn-dark' id='codebreaker-btn' value='Дешифровать'>
                 </div>
             </div>

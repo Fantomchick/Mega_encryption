@@ -77,3 +77,10 @@ obsh {
 p {
     color: #ffffff;
 }
+
+#nav{
+    right: 0;
+
+    position: absolute;
+    color: #ffffff;
+}
