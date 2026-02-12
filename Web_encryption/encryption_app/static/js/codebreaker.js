@@ -1,43 +1,20 @@
-// $('#codebreaker-btn').click(
-//     function () {
-//         let cdButton = $('#codebreaker-btn')
-//         const cdFile = $("codebreake").files;
-//         const CSRF = $('[name=csrfmiddlewaretoken]').val()
+$('#codebreaker-btn').click(
+    function () {
+        let = $('#cryptographer-btn')
+        const csrf = $('[name=csrfmiddlewaretoken]').val()
+        const codebreaker_file = $('#codebreaker').file
 
-//         let userData = {
-//             'cdfile': cdFile,
-//             'csrfmiddlewaretoken': CSRF
-//         }
-//         $.ajax({
-//             url: '/index/',
-//             type: 'POST',
-//             dataType: 'json',
-//             data: userData,
+        const fromData = new FormData()
+        fromData.append('csrfmiddlewaretoken', csrf)
+        fromData.append('codebreaker_files', codebreaker_file)
 
-//             success:
-//                 function (data) {
-//                     console.log('Success: ', data);
-//                     cdButton.text('Успешно');
-//                     cdButton.prop('disabled', true);
-//                     cdButton.css({
-//                         'background-color': '#4CAF50',
-//                         'color': '#fff',
-//                     });
-//                 },
-//         });
+        $.ajax({
+            url: '',
+            type: 'POST',
+            data: fromData,
+            processData: false,
+            contentType: false,
+        });
 
-//     }
-// );
-document.getElementById('codebreaker-btn').addEventListener('click', () => {
-    const codebreaker = document.getElementById('codebreaker');
-    const file = codebreaker.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    // Добавьте CSRF-токен, если необходимо
-    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
-
-    fetch('', {
-        method: 'POST',
-        body: formData
-    })
-});
+    }
+);

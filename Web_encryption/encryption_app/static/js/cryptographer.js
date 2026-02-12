@@ -1,44 +1,23 @@
-//   $('#cryptographer-btn').click(
-//     function () {
-//         let crButton = $('#cryptographer-btn')
-//         const crFile = $("codebreake").files;
-//         const CSRF = $('[name=csrfmiddlewaretoken]').val()
+$('#cryptographer-btn').click(
+    function () {
+        let  = $('#cryptographer-btn')
+        const csrf = $('[name=csrfmiddlewaretoken]').val()
+        const cryptographer_file = $('#cryptographer').file
 
-//         let userData = {
-//             'crfile': crFile,
-//             'csrfmiddlewaretoken': CSRF
-//         }
-//         $.ajax({
-//             url: '/index/',
-//             type: 'POST',
-//             dataType: 'json',
-//             data: userData,
+        const fromData= new FormData()
+        fromData.append('csrfmiddlewaretoken', csrf)
+        fromData.append('cryptographer_files', cryptographer_file)
 
-//             success:
-//                 function (data) {
-//                     console.log('Success: ', data);
-//                     crButton.text('Успешно');
-//                     crButton.prop('disabled', true);
-//                     crButton.css({
-//                         'background-color': '#4CAF50',
-//                         'color': '#fff',
-//                     });
-//                 },
-//         });
+        $.ajax({
+            url: '',
+            type: 'POST',
+            data: fromData,
+            processData: false,
+            contentType: false,
+        });
 
-//     }
-// );
-document.getElementById('cryptographer-btn').addEventListener('click', () => {
-    const cryptographer = document.getElementById('cryptographer');
-    const file = cryptographer.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    // Добавьте CSRF-токен, если необходимо
-    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+    }
+);
 
-    fetch('', {
-        method: 'POST',
-        body: formData
-    })
-});
+
 
