@@ -6,6 +6,6 @@ urlpatterns= [
     path('',views.index,name='index'),
     path('reg/',views.reg,name='reg'),
     path('logout/',views.logout_view,name='logout'),
-    path('/cryptographer',views.cryptographer,name='cryptographer'), 
+    path('cryptographer/',views.cryptographer,name='cryptographer'), 
     path('/codebreaker',views.codebreaker,name='codebreaker'),       
 ]

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import FileSystemStorage
 
@@ -10,24 +10,30 @@ from django.core.files.storage import FileSystemStorage
 @csrf_exempt
 def cryptographer(request):
     if request.method == 'POST':
-        homework={
-            'files': request.FILES.get('cryptographer_files')
+        crypto_file = {
+            'file': request.FILES.getlist('cryptographer_file')
         }
-        if homework.file_field:
+
+        for file in crypto_file['file']:
+            print('test: ', file)
+
+        if crypto_file:
             # Файл существует (заполнен в базе данных)
-            print(homework.file_field.path)
+            print(crypto_file['file'])
         else:
             # Поле пустое
-            print("Файл не загружен")      
-    if homework.file_field:
+            print("Файл не загружен")  
+
+    if crypto_file:
         # Файл существует (заполнен в базе данных)
-        print(homework.file_field.path)
+        print(crypto_file)
     else:
         # Поле пустое
         print("Файл не загружен")    
-    print(homework)
+    print(crypto_file)
     print(1)
-    return homework
+    return HttpResponse(201)
+
 @csrf_exempt
 def codebreaker(request):
     if request.method == 'POST':
