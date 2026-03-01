@@ -1,17 +1,22 @@
 $('#codebreaker-btn').click(
     function () {
-        let = $('#cryptographer-btn')
+        let codebreakBtn = $('#cryptographer-btn')
         const csrf = $('[name=csrfmiddlewaretoken]').val()
-        const codebreaker_file = $('#codebreaker').file
+        const codebreaker_file = $('#codebreaker')[0];
+        const file = codebreaker_file.files[0]
+        console.log(codebreaker_file);
+        console.log(file)
 
-        const fromData = new FormData()
-        fromData.append('csrfmiddlewaretoken', csrf)
-        fromData.append('codebreaker_files', codebreaker_file)
+        const formData = new FormData()
+        formData.append('csrfmiddlewaretoken', csrf)
+        formData.append('codebreaker_file', file)
+
+        console.log(formData);
 
         $.ajax({
-            url: '',
+            url: '/codebreaker/',
             type: 'POST',
-            data: fromData,
+            data: formData,
             processData: false,
             contentType: false,
         });
