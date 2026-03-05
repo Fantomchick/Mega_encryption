@@ -31,8 +31,15 @@ $('#reg-btn').click(
                         'background-color': '#4CAF50',
                         'color': '#fff',
                     });
-                    window.location.href = '/'; //переход на главную сайта
+                    window.location.href = '/'
                 },
+            error:
+                function (data) {
+                    console.log('Error: ', data);
+                    regButton.text("Нет такого пользователя");
+                    regButton.prop('disabled', false);
+                    alert("Такой пользователь уже существует")
+                }
         });
 
     }
