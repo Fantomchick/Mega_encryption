@@ -1,132 +1,164 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse,FileResponse
 from django.views.decorators.csrf import csrf_exempt
 from cryptography.fernet import Fernet
+from django.urls import reverse
+from .models import File_Base
 import os
-import mimetypes
+from django.conf import settings
 
 
+def get_or_create_user_key(user):
+    """
+    Функция ищет ключ пользователя в media/keys/username/key.key.
+    Если ключа нет — создает его.
+    """
+    # Папка ключей конкретного пользователя
+    user_key_dir = os.path.join(settings.MEDIA_ROOT, 'keys', user.username)
+    key_path = os.path.join(user_key_dir, 'key.key')
+
+    # Если папки или ключа нет — создаем
+    if not os.path.exists(key_path):
+        os.makedirs(user_key_dir, exist_ok=True)
+        new_key = Fernet.generate_key()
+        with open(key_path, 'wb') as key_file:
+            key_file.write(new_key)
+        return new_key
+    else:
+        with open(key_path, 'rb') as key_file:
+            existing_key = key_file.read()
+        return existing_key 
 #рендеринг индекса
 @csrf_exempt
 def cryptographer(request):
     if request.method == 'POST':
         crypto_file =request.FILES.get('cryptographer_file')
-        # mime_type, _ = mimetypes.guess_type(crypto_file)
-        # if mime_type is not None or mime_type.startswith('text'):
-        #     encrypted_data = encrypt_text_file(crypto_file)
-            # print(f"Файл {crypto_file} не является текстовым (тип: {mime_type}). Пропуск.")
-            # return    
+        if not request.user.is_authenticated:
+           return JsonResponse({'error': 'Вы должны быть авторизованы'}, status=403)
         
-    if crypto_file:
-        print(crypto_file)
-    else:
-        print("Файл не загружен")   
+        if not crypto_file:
+            return JsonResponse({'error': 'Файл не выбран'}, status=400)
+
+        # 1. Сохраняет файл в БД (в папку по умолчанию из модели)
+        file_instance = File_Base.objects.create(data_file=crypto_file)
+        original_path = file_instance.data_file.path
         
-    return HttpResponse(201)
+        try:
+            # 2. Получает ЛИЧНЫЙ ключ пользователя
+            user_key = get_or_create_user_key(request.user)
+            fernet = Fernet(user_key)
+
+            # 3. Читает и шифруем данные
+            with open(original_path, 'rb') as f:
+                data = f.read()
+            
+            encrypted_data = fernet.encrypt(data)
+
+            # 4. Сохраняет зашифрованный файл (добавляем .encrypted)
+            enc_path = original_path + ".encrypted"
+            with open(enc_path, 'wb') as f:
+                f.write(encrypted_data)
+
+            # 5. Удаляет оригинал и чистим запись в БД (как в задании)
+            crypto_dir = os.path.join(settings.MEDIA_ROOT, 'crypto_files')
+            encrypted_filename = crypto_file.name
+            encrypted_path = os.path.join(crypto_dir, encrypted_filename)
+            os.remove(encrypted_path)
+
+            # 6. Возвращает URL для скачивания через AJAX
+            download_url = reverse('download_file', kwargs={'filename': os.path.basename(enc_path)})
+            
+
+            return JsonResponse({
+                'status': 'success',
+                'download_url': download_url
+            })
+
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Вы должны быть авторизованы'}, status=403)
+
+def download_file(request, filename):
+    """Вспомогательный view для отдачи файла"""
+    # Путь к файлу в папке media/crypto_files/
+    file_path = os.path.join(settings.MEDIA_ROOT, 'crypto_files', filename)
+    if os.path.exists(file_path):
+        return FileResponse(open(file_path, 'rb'), as_attachment=True)
+    return JsonResponse({'error': 'Файл не найден'}, status=404)        
+
 
 @csrf_exempt
 def codebreaker(request):
+    print('Yes')
     if request.method == 'POST':
-        cobr_file = request.FILES.get('codebreaker_file')
+        encrypted_file = request.FILES.get('codebreaker_file')
+        if not request.user.is_authenticated:
+           return JsonResponse({'error': 'Вы должны быть авторизованы'}, status=403)
+        if not encrypted_file:
+            return JsonResponse({'error': 'Файл не выбран'}, status=400)
+        print('Yes')
+        # Сохраняем загруженный .encrypted файл во временную папку media/crypto_files/
+        crypto_dir = os.path.join(settings.MEDIA_ROOT, 'crypto_files')
+        os.makedirs(crypto_dir, exist_ok=True)
+        print('Yes')
+        encrypted_filename = encrypted_file.name
+        encrypted_path = os.path.join(crypto_dir, encrypted_filename)
 
-    if cobr_file:
-        print(cobr_file)
-    else:
-        print("Файл не загружен")    
-    return HttpResponse(201)
+        with open(encrypted_path, 'wb') as f:
+            for chunk in encrypted_file.chunks():
+                f.write(chunk)
+        print('Yes')
+        try:
+            # Получаем ключ пользователя
+            user_key = get_or_create_user_key(request.user)
+            fernet = Fernet(user_key)
+            print('Yes')
+            # Читаем зашифрованные данные
+            with open(encrypted_path, 'rb') as f:
+                encrypted_data = f.read()
+            print('Yes')
+            # Расшифровываем
+            decrypted_data = fernet.decrypt(encrypted_data)
+            print('Yes')
+            # Формируем имя исходного файла (убираем .encrypted)
+            if encrypted_filename.endswith('.encrypted'):
+                original_filename = encrypted_filename[:-10]
+            else:
+                original_filename = encrypted_filename + '.decrypted'
+            print('Yes')
+            decrypted_path = os.path.join(crypto_dir, original_filename)
+            print('Yes')
+            # Сохраняем расшифрованный файл
+            with open(decrypted_path, 'wb') as f:
+                f.write(decrypted_data)
 
+            # Удаляем зашифрованный файл
+            os.remove(encrypted_path)
+            print('Yes9')
+            # Возвращаем URL для скачивания расшифрованного файла
+            download_url = reverse('download_file', kwargs={'filename': original_filename})
 
+            return JsonResponse({
+                'status': 'success',
+                'download_url': download_url
+            })
+        except Exception as e:
+            # Если ошибка дешифровки (например, неправильный ключ)
+            return JsonResponse({'error': f'Ошибка дешифровки: {str(e)}'}, status=500)
 
-
-def encrypt_text_file(file_path, base_dir="encrypted_files"):
-    """Шифрует текстовый файл, создавая отдельную папку и уникальный ключ."""
-    # 1. Определяем тип файла
-    # mime_type, _ = mimetypes.guess_type(file_path)
-    # if mime_type is None or not mime_type.startswith('text'):
-    #     print(f"Файл {file_path} не является текстовым (тип: {mime_type}). Пропуск.")
-    #     return
-
-    # 2. Создаем уникальную папку для файла
-    file_name = os.path.basename(file_path)
-    target_dir = os.path.join(base_dir, file_name + "_secure")
-    os.makedirs(target_dir, exist_ok=True)
-
-    # 3. Генерируем уникальный ключ
-    key = Fernet.generate_key()
-    fernet = Fernet(key)
-
-    # 4. Шифруем файл
-    with open(file_path, 'rb') as f:
-        file_data = f.read()
-    encrypted_data = fernet.encrypt(file_data)
-
-    # 5. Сохраняем зашифрованный файл и ключ
-    with open(os.path.join(target_dir, file_name + ".fernet"), 'wb') as f:
-        f.write(encrypted_data)
-    with open(os.path.join(target_dir, "key.key"), 'wb') as f:
-        f.write(key)
-
-    print(f"Файл {file_name} зашифрован в {target_dir}")
-
-def decrypt_text_file(target_dir, original_file_name):
-    """Дешифрует файл, используя ключ из папки."""
-    key_path = os.path.join(target_dir, "key.key")
-    encrypted_file_path = os.path.join(target_dir, original_file_name + ".fernet")
-
-    if not os.path.exists(key_path) or not os.path.exists(encrypted_file_path):
-        print("Ключ или зашифрованный файл не найдены.")
-        return
-
-    with open(key_path, 'rb') as f:
-        key = f.read()
-    fernet = Fernet(key)
-
-    with open(encrypted_file_path, 'rb') as f:
-        encrypted_data = f.read()
-    
-    decrypted_data = fernet.decrypt(encrypted_data)
-
-    # Сохраняем расшифрованный файл
-    output_path = os.path.join(target_dir, "decrypted_" + original_file_name)
-    with open(output_path, 'wb') as f:
-        f.write(decrypted_data)
-    print(f"Файл дешифрован: {output_path}")
-
-
-
-
-
-
-
+    return JsonResponse({'error': 'Вы должны быть авторизованы'}, status=403)
 
 
 @csrf_exempt
 def index(request):
-    # if request.method == 'POST':
-    #     homework={
-    #         'files': request.FILES.get('cryptographer_files')
-    #     }      
-    #     print(homework)
     try:
         context = {'username': request.user.username}
         return render(request,"index.html",context)    
     except AttributeError as e:
         return render(request,"index.html")
-    # try:
-    #     context = {'username': request.user.username}
-    #     if request.method == 'POST' and request.FILES['file']:
-    #         uploaded_file = request.FILES['file']
-    #         # Сохранение файла или обработка
-    #         # fs = FileSystemStorage()
-    #         # fs.save(uploaded_file.name, uploaded_file)
-    #         print("Yes")
-    #     else:
-    #         print("No")               
-    #     return render(request,"index.html",context)    
-    # except AttributeError as e:
-    #     return render(request,"index.html")    
 
 def reg(request):
     if request.method == 'POST':

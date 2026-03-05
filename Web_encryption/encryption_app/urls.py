@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 #добавил привязку к идексу
 urlpatterns= [
+    path('download/<str:filename>/', views.download_file, name='download_file'),
     path('',views.index,name='index'),
     path('reg/',views.reg,name='reg'),
     path('auth/',views.auth,name='auth'),
