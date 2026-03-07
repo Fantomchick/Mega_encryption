@@ -19,6 +19,24 @@ $('#cryptographer-btn').click(
             data: formData,
             processData: false,
             contentType: false,
+            success: 
+                function (data) {
+                    if (data.download_url) {
+                        // создает невидимую ссылку и активирует ее
+                        let link = document.createElement('a');
+                        link.href = data.download_url;
+                        link.download = ''; // Браузер предложит сохранить файл
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        alert('Файл зашифрован и перемещен в загрузки');
+                }
+            },
+            error:
+                    function(error) {
+                        console.error('Error', error);
+                        alert(error.responseJSON.error);
+            }
         });
 
     }
