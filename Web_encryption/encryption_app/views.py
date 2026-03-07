@@ -61,7 +61,7 @@ def cryptographer(request):
             with open(enc_path, 'wb') as f:
                 f.write(encrypted_data)
 
-            # 5. Удаляет оригинал и чистим запись в БД (как в задании)
+            # 5. Удаляет оригинал и чистим запись в БД
             crypto_dir = os.path.join(settings.MEDIA_ROOT, 'crypto_files')
             encrypted_filename = crypto_file.name
             encrypted_path = os.path.join(crypto_dir, encrypted_filename)
@@ -79,8 +79,6 @@ def cryptographer(request):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
 
-    return JsonResponse({'error': 'Вы должны быть авторизованы'}, status=403)
-
 def download_file(request, filename):
     """Вспомогательный view для отдачи файла"""
     # Путь к файлу в папке media/crypto_files/
@@ -88,7 +86,6 @@ def download_file(request, filename):
     if os.path.exists(file_path):
         return FileResponse(open(file_path, 'rb'), as_attachment=True)
     return JsonResponse({'error': 'Файл не найден'}, status=404)        
-
 
 @csrf_exempt
 def codebreaker(request):
@@ -99,38 +96,30 @@ def codebreaker(request):
            return JsonResponse({'error': 'Вы должны быть авторизованы'}, status=403)
         if not encrypted_file:
             return JsonResponse({'error': 'Файл не выбран'}, status=400)
-        print('Yes')
         # Сохраняем загруженный .encrypted файл во временную папку media/crypto_files/
         crypto_dir = os.path.join(settings.MEDIA_ROOT, 'crypto_files')
         os.makedirs(crypto_dir, exist_ok=True)
-        print('Yes')
         encrypted_filename = encrypted_file.name
         encrypted_path = os.path.join(crypto_dir, encrypted_filename)
 
         with open(encrypted_path, 'wb') as f:
             for chunk in encrypted_file.chunks():
                 f.write(chunk)
-        print('Yes')
         try:
             # Получаем ключ пользователя
             user_key = get_or_create_user_key(request.user)
             fernet = Fernet(user_key)
-            print('Yes')
             # Читаем зашифрованные данные
             with open(encrypted_path, 'rb') as f:
                 encrypted_data = f.read()
-            print('Yes')
             # Расшифровываем
             decrypted_data = fernet.decrypt(encrypted_data)
-            print('Yes')
             # Формируем имя исходного файла (убираем .encrypted)
             if encrypted_filename.endswith('.encrypted'):
                 original_filename = encrypted_filename[:-10]
             else:
                 original_filename = encrypted_filename + '.decrypted'
-            print('Yes')
             decrypted_path = os.path.join(crypto_dir, original_filename)
-            print('Yes')
             # Сохраняем расшифрованный файл
             with open(decrypted_path, 'wb') as f:
                 f.write(decrypted_data)
@@ -148,8 +137,6 @@ def codebreaker(request):
         except Exception as e:
             # Если ошибка дешифровки (например, неправильный ключ)
             return JsonResponse({'error': f'Ошибка дешифровки: {str(e)}'}, status=500)
-
-    return JsonResponse({'error': 'Вы должны быть авторизованы'}, status=403)
 
 
 @csrf_exempt
