@@ -183,3 +183,17 @@ def auth(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+def account(request):
+    flag=1
+    context={
+        'flag_reg': flag,
+    }    
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        nickname = request.POST.get('nickname')
+        username = nickname       
+        print("Ник: ",username,'\n',"Пароль: ",password,"Почта",email,'\n',"Код",cod_email,'\n',"Пароль проверка",password_proverka,sep='')
+        return JsonResponse({'status':'success'})
+    return render(request, 'account.html',context)

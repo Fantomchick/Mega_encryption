@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Профиль{% endblock %}
+
+{% block css %}
+    <!-- Связывание с CSS файлом -->
+    <link rel="stylesheet" href={% static 'style/account.css' %}>
+{% endblock %}
+
+{% block content %}
+    {% csrf_token %}
+    <main class="container account" id="auth">
+        <div class="container text-white">
+            <h1>Настройки профиля</h1>
+             <!-- Пароль -->
+            <label for="password" class="form-label reg-label">Введите новый пароль, если хотите его изменить или введите старый</label>
+            <input type="password" class="form-control" id="password" placeholder="Введите пароль" value="{{ password }}">
+            <!-- Имя -->
+            <label for="first-name" class="form-label">Введите новый ник, если хотите его изменить или введите старый</label>
+            <input type="text" class="form-control" id="nickname" placeholder="Введите ник" value="{{ nickname }}">
+            <!-- Почта -->
+            <label for="email" class="form-label reg-label">Электронная почта</label>
+            <input type="email" class="form-control"  id="email" placeholder="Введите почту и ждите код для потверждения" value="{{ email }}">
+            <label for='nickname' class='form-label' id='cod-email-label'>Введите код с полученого сообщения</label>
+            <input type="text" class='form-control ' id='cod-email' value='Fantom'>
+            <!-- Кнопка регистрации -->
+            <input type="button" class="btn btn-dark" id="save-button" value="Изменить">
+        </div>
+    </main>   
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src={% static 'js/account.js' %}></script>
+{% endblock %}

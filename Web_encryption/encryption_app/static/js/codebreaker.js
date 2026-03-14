@@ -32,6 +32,11 @@ $('#codebreaker-btn').click(
                     alert('Файл расшифрован и перемещен в загрузки');
                 }
             },
+            error:
+                    function(error) {
+                        console.error('Error', error);
+                        alert(error.responseJSON.error);
+            }            
         });
 
     }

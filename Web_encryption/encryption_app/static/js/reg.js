@@ -4,7 +4,7 @@ $('#reg-btn').click(
         let password = $('#password').val()
         let email = $('#email').val()
         let codEmail = $('#cod-email').val()
-        let passwordProverka = $('#password-proverka').val()
+        // let passwordProverka = $('#password-proverka').val()
         let regButton = $('#reg-btn')
         const CSRF = $('[name=csrfmiddlewaretoken]').val()
 

@@ -1,4 +1,66 @@
+{% extends 'base.html' %}
 {% load static %}
+
+{% block title %}Шифратор{% endblock %}
+{% block css %}
+<!-- Связывание с CSS файлом -->
+<link rel='icon' href={%static 'faicon.png' %}></link>
+<link rel="stylesheet" href={%static 'css/encryption.css' %}></link>
+{% endblock %}
+{% block content %}
+    {% csrf_token %}
+    <div id="nav">
+        <div>
+            {%if username %}
+            <a class="nav-link dropdown-toggle " href='' data-bs-toggle="dropdown">{{username}}</a>
+            <ul class="dropdown-menu bg-dark">
+                <li><a class="dropdown-item text-white " id='logout-link' href={%url 'logout' %}>Выйти</a></li>
+            </ul>
+            {%else%}
+            <a class="nav-link" href={% url 'reg' %} tabindex="-1" aria-disabled="true">Войти/Зарегистрироваться</a>
+            {%endif%}
+        </div>
+    </div>
+
+    <!--Заголовок-->
+    <header>
+        <div class="container text-white pt-5 roboto-italic overlay">
+            <h1 class="ki-header-title">УЛЬТРА</h1>
+            <h2 class="ki-header-title">ШИФРОВЩИК/ДЕШИФРОВЩИК</h2>
+        </div>    
+    </header>
+    
+    <div class="container text-white bg-dark block">
+        <div class="row justify-content-center block">
+            <div class="col-sm-6 ">
+                <div class="row d-flex justify-content-center">
+                    <h2 id="zagalovok" class="row text-white d-flex justify-content-center" >Шифроваться</h2>
+                    <br>
+                    <label for='nickname' class='form-label' id='cryptographer-text'><h5 class=" text-white row d-flex justify-content-center">Выберете файл, который вы хотите зашифровать</h5></label>
+                    <input type="file" class='form-control ' id='cryptographer'>
+                    <input type="button" class='btn btn-dark' id='cryptographer-btn' value='Шифровать'>
+                    <br>
+                    <h2 id="zagalovok" class="row text-white d-flex justify-content-center">Дешифроваться</h2>
+                    <br>
+                    <label for='nickname' class='form-label' id='codebreaker-text'><h5 class=" text-white row d-flex justify-content-center">Выберете файл, который хотите дешифровать</h5></label>
+                    <input type="file" class='form-control' id='codebreaker'>
+                    <input type="button" class='btn btn-dark' id='codebreaker-btn' value='Дешифровать'>
+                </div>
+            </div>
+        </div>
+    
+{% endblock %}
+{% block js %}
+    <script src={% static 'js/codebreaker.js' %}></script>
+    <script src={% static 'js/cryptographer.js' %}></script>
+{% endblock %}
+
+
+
+
+
+
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,4 +120,4 @@
     <script src={% static 'js/codebreaker.js' %}></script>
     <script src={% static 'js/cryptographer.js' %}></script>
 </body>
-</html>
+</html> {% endcomment %}
