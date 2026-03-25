@@ -1,7 +1,7 @@
 $('#auth-btn').click(
     function () {
-        let nickname = $('#nickname').val()
-        let password = $('#password').val()
+        let nickname = $('#nickname_auth').val()
+        let password = $('#password_auth').val()
         let authButton = $('#auth-btn')
         const CSRF = $('[name=csrfmiddlewaretoken]').val()
 

@@ -66,9 +66,7 @@ body {
     background-color: black;
 }
 
-#nav-login {
-    background-color: black;
-}
+
 
 obsh {
     align-items: center;
@@ -78,9 +76,26 @@ p {
     color: #ffffff;
 }
 
-#nav{
+.absolut{
     right: 0;
-
     position: absolute;
     color: #ffffff;
+}
+.navbar {
+    right: 0;
+    position: absolute;
+    color: #ffffff;
+}
+.block{
+    background: #000000;
+    color: #000000;    
+}
+#sc{
+    background-color: rgba(0, 0, 0, 0.0);
+    border: none;
+    background-color: transparent;
+}
+.ar{
+    background-color: rgba(0, 0, 0, 0.0);
+    border: none;
 }

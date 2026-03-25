@@ -6,7 +6,6 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     background-color: rgb(34, 40, 49);
 }
-
 #obsh {
     align-items: center;
 }
@@ -15,17 +14,30 @@ p {
     color: #ffffff;
 }
 
-#reg-link:hover{
-    text-decoration:underline
+#reg-link:hover {
+    text-decoration: underline
 }
 
-#reg-link:active{
-    color:coral
+#reg-link:active {
+    color: coral
 }
 
 #reg-link{
-    color:rgb(255, 255, 255);
-    text-decoration:none;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+#auth-btn:hover {
+    text-decoration: underline
+}
+
+#auth-btn:active {
+    color: coral
+}
+
+#auth-btn{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }
 
 .absolut {
@@ -33,7 +45,6 @@ p {
     position: absolute;
     color: #ffffff;
 }
-
 .navbar {
     right: 0;
     position: absolute;
@@ -44,10 +55,8 @@ p {
     header {
         height: 15rem;
     }
-    interesting-text{
 
-    }
-    interesting-title{
-        
-    }
+    interesting-text {}
+
+    interesting-title {}
 }

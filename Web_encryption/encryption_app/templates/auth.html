@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Вход{% endblock %}
+
+{% block css %}
+<!-- Связывание с CSS файлом -->
+<link rel='icon' href={%static 'faicon.png' %}>
+</link>
+<link rel="stylesheet" href={%static 'css/auth.css' %}>
+</link>
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+<div class="container text-white " >
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <main class="row justify-content-center ">
+                <h2 class="row justify-content-center" id='obsh'>Войти</h2>
+                <div class="text-white" id="auth">
+                    <label for='nickname' class='form-label' id='nickname-label'>Введите свой ник или нажмите <a id='reg-link' href="{%url 'account'%}">сюда</a>, если забыли его</label>
+                    <input type="text" class='form-control ' id='nickname' value='Fantom'>
+                    <label for='password' class='form-label' id='password-label'>Введите свой пароль или нажмите <a id='reg-link' href="{%url 'account'%}">сюда</a>, если забыли его</label>
+                    <input type="password" class='form-control ' id='password' value='111fefefefef'>
+                    <input type="button" class='btn btn-dark' id='auth-btn' value='Войти'>
+                    <p>Ещё не зарегистрированы ? Тогда нажмите <a id='reg-link' href="{%url 'reg'%}">сюда,</a> чтобы зарегистрироваться</p>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src={% static 'js/auth.js' %}></script>
+{% endblock %}

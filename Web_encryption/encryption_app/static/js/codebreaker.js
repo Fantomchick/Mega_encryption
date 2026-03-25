@@ -4,13 +4,19 @@ $('#codebreaker-btn').click(
         const csrf = $('[name=csrfmiddlewaretoken]').val()
         const codebreaker_file = $('#codebreaker')[0];
         const file = codebreaker_file.files[0]
+        file_size = file.size
         console.log(codebreaker_file);
         console.log(file)
 
         const formData = new FormData()
         formData.append('csrfmiddlewaretoken', csrf)
         formData.append('codebreaker_file', file)
-
+        if (file.size >1024*1024*1024) {
+            alert('Размер файла больше 1 Гб')
+            codebreaker.value = ''
+            formData = ''
+            return false, formData;
+        }
         console.log(formData);
 
         $.ajax({
@@ -32,6 +38,11 @@ $('#codebreaker-btn').click(
                     alert('Файл расшифрован и перемещен в загрузки');
                 }
             },
+            error:
+                    function(error) {
+                        console.error('Error', error);
+                        alert(error.responseJSON.error);
+            }            
         });
 
     }

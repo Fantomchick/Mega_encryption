@@ -8,6 +8,7 @@ from django.urls import reverse
 from .models import File_Base
 import os
 from django.conf import settings
+from .models import  UserProfile
 
 
 def get_or_create_user_key(user):
@@ -41,10 +42,10 @@ def cryptographer(request):
         if not crypto_file:
             return JsonResponse({'error': 'Файл не выбран'}, status=400)
 
+
         # 1. Сохраняет файл в БД (в папку по умолчанию из модели)
         file_instance = File_Base.objects.create(data_file=crypto_file)
         original_path = file_instance.data_file.path
-        
         try:
             # 2. Получает ЛИЧНЫЙ ключ пользователя
             user_key = get_or_create_user_key(request.user)
@@ -96,7 +97,8 @@ def codebreaker(request):
            return JsonResponse({'error': 'Вы должны быть авторизованы'}, status=403)
         if not encrypted_file:
             return JsonResponse({'error': 'Файл не выбран'}, status=400)
-        # Сохраняем загруженный .encrypted файл во временную папку media/crypto_files/
+        
+        # Сохраняет загруженный .encrypted файл во временную папку media/crypto_files/
         crypto_dir = os.path.join(settings.MEDIA_ROOT, 'crypto_files')
         os.makedirs(crypto_dir, exist_ok=True)
         encrypted_filename = encrypted_file.name
@@ -106,28 +108,28 @@ def codebreaker(request):
             for chunk in encrypted_file.chunks():
                 f.write(chunk)
         try:
-            # Получаем ключ пользователя
+            # Получает ключ пользователя
             user_key = get_or_create_user_key(request.user)
             fernet = Fernet(user_key)
-            # Читаем зашифрованные данные
+            # Читает зашифрованные данные
             with open(encrypted_path, 'rb') as f:
                 encrypted_data = f.read()
-            # Расшифровываем
+            # Расшифровывает
             decrypted_data = fernet.decrypt(encrypted_data)
-            # Формируем имя исходного файла (убираем .encrypted)
+            # Формирует имя исходного файла (убираем .encrypted)
             if encrypted_filename.endswith('.encrypted'):
                 original_filename = encrypted_filename[:-10]
             else:
                 original_filename = encrypted_filename + '.decrypted'
             decrypted_path = os.path.join(crypto_dir, original_filename)
-            # Сохраняем расшифрованный файл
+            # Сохраняет расшифрованный файл
             with open(decrypted_path, 'wb') as f:
                 f.write(decrypted_data)
 
-            # Удаляем зашифрованный файл
+            # Удаляет зашифрованный файл
             os.remove(encrypted_path)
             print('Yes9')
-            # Возвращаем URL для скачивания расшифрованного файла
+            # Возвращает URL для скачивания расшифрованного файла
             download_url = reverse('download_file', kwargs={'filename': original_filename})
 
             return JsonResponse({
@@ -160,7 +162,7 @@ def reg(request):
         #print("Ник: ",username,'\n',"Пароль: ",password,"Почта",email,'\n',"Код",cod_email,'\n',"Пароль проверка",password_proverka,sep='')
         return JsonResponse({'status':'success'})
 
-    return render(request,"reg.html")
+    return render(request)
 
 def auth(request):
     if request.method == 'POST':
@@ -178,8 +180,24 @@ def auth(request):
             print('no')
             login(request, user )
             return JsonResponse({'status':'error'})  
-    return render(request,"reg.html")
+    return render(request)
 
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+def account(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        nickname = request.POST.get('nickname')
+        username = nickname       
+        # print("Ник: ",username,'\n',"Пароль: ",password,"Почта",email,'\n',"Код",cod_email,'\n',"Пароль проверка",password_proverka,sep='')
+        return JsonResponse({'status':'success'})
+    
+    print(request.user.id)
+    context = {
+        # 'username' : request.user.username,
+        # 'email' : request.user.email,
+    }
+    return render(request, 'account.html',context, status=418)

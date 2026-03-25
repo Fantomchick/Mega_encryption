@@ -6,7 +6,6 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     background-color: rgb(34, 40, 49);
 }
-
 #obsh {
     align-items: center;
 }
@@ -15,39 +14,29 @@ p {
     color: #ffffff;
 }
 
-#reg-link:hover{
-    text-decoration:underline
+#reg-link:hover {
+    text-decoration: underline
 }
 
-#reg-link:active{
-    color:coral
+#reg-link:active {
+    color: coral
 }
 
-#reg-link{
-    color:rgb(255, 255, 255);
-    text-decoration:none;
+#reg-link {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }
-
-.absolut {
+.nav1{
     right: 0;
     position: absolute;
     color: #ffffff;
 }
-
-.navbar {
-    right: 0;
-    position: absolute;
-    color: #ffffff;
-}
-
 @media screen and (max-width: 600px) {
     header {
         height: 15rem;
     }
-    interesting-text{
 
-    }
-    interesting-title{
-        
-    }
+    interesting-text {}
+
+    interesting-title {}
 }
