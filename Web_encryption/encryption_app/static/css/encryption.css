@@ -76,16 +76,20 @@ p {
     color: #ffffff;
 }
 
-.absolut{
+/* .absolut{
     right: 0;
     position: absolute;
     color: #ffffff;
-}
+} */
+
 .navbar {
-    right: 0;
-    position: absolute;
-    color: #ffffff;
+    /* right: 0; */
+    /* position: absolute; */
+    /* color: #ffffff; */
+    /* background-color: rgba(255, 255, 255, 0.5) !important; */
+    background: transparent;
 }
+
 .block{
     background: #000000;
     color: #000000;    

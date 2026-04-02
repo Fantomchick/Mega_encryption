@@ -40,7 +40,7 @@ p {
     text-decoration: none;
 }
 
-.absolut {
+/* .absolut {
     right: 0;
     position: absolute;
     color: #ffffff;
@@ -49,7 +49,7 @@ p {
     right: 0;
     position: absolute;
     color: #ffffff;
-}
+} */
 
 @media screen and (max-width: 600px) {
     header {

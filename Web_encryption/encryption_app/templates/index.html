@@ -11,10 +11,13 @@
     {% csrf_token %}
     <!--Заголовок-->
     <header>
-        <div class="container text-white pt-5 roboto-italic overlay">
-            <h1 class="ki-header-title">УЛЬТРА</h1>
-            <h2 class="ki-header-title">ШИФРОВЩИК/ДЕШИФРОВЩИК</h2>
-        </div>    
+        <div class="overlay">
+            {% include 'parct/nav.html' %}
+            <div class="container text-white pt-5 roboto-italic">
+                <h1 class="ki-header-title">УЛЬТРА</h1>
+                <h2 class="ki-header-title">ШИФРОВЩИК/ДЕШИФРОВЩИК</h2>
+            </div>
+        </div>
     </header>
     
     <div class="container text-white bg-dark block">
