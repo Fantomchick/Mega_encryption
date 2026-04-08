@@ -30,20 +30,7 @@
     <main>
         {% block content %}{% endblock %}
     </main>
-
-    {% include 'parct/footer.html' %}
-
-    <!-- jQuery 3.7.1 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <!-- Bootstrap 5.3 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    <script src={% static 'js/reg.js' %}></script>
-    <script src={% static 'js/auth.js' %}></script>
-    {% block js %}{% endblock %}
-
-    <div class="modal fade" id="account" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="account" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="card text-white">
@@ -70,7 +57,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -84,7 +71,7 @@
                     <input type="password" class='form-control ' id='password_auth' value='111fefefefef'>
                     <input type="button" class='btn btn-dark' id='auth-btn' value='Войти'>
                     <!-- <p>Ещё не зарегистрированы ? Тогда нажмите <a id='reg-link' href="{%url 'reg'%}">сюда,</a> чтобы
-                                            зарегистрироваться</p> -->
+                                                    зарегистрироваться</p> -->
                 </div>
             </div>
         </div>
@@ -98,20 +85,31 @@
                     <label for='nickname' class='form-label' id='email-label'>Введите почту</label>
                     <input type="email" class='form-control ' id='email' value='Fantom@yandex.ru'>
                     <!-- <label for='nickname' class='form-label' id='cod-email-label'>Введите код с полученого сообщения</label>
-                                    <input type="text" class='form-control ' id='cod-email' value='Fantom'> -->
+                                            <input type="text" class='form-control ' id='cod-email' value='Fantom'> -->
                     <label for='nickname' class='form-label' id='nickname-label'>Придумайте ник для регистрации</label>
                     <input type="text" class='form-control ' id='nickname' value='Fantom'>
                     <label for='password' class='form-label' id='password-label'>Придумайте пароль для регистрации</label>
                     <input type="password" class='form-control ' id='password' value='111fefefefef'>
-                    {% comment %} <label for='password' class='form-label' id='password-proverka-label'>Повторите
-                        пароль</label> {%endcomment %}
-                    {% comment %} <input type="password" class='form-control ' id='password-proverka' value='111fefefefef'>
-                    {%endcomment %}
+                    <label for='password' class='form-label' id='password-examination-label'>Повторите пароль</label>
+                    <input type="password" class='form-control ' id='password-examination' value='111fefefefef'>
                     <input type="button" class='btn btn-dark' id='reg-btn' value='Зарегистрироваться'>
                 </div>
             </div>
         </div>
     </div>
+
+    {% include 'parct/footer.html' %}
+    
+    <!-- jQuery 3.7.1 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Bootstrap 5.3 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src={% static 'js/reg.js' %}></script>
+    <script src={% static 'js/auth.js' %}></script>
+    <script src={% static 'js/height.js' %}></script>
+    {% block js %}{% endblock %}
 </body>
 
 </html>

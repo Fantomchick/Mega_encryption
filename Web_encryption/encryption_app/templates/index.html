@@ -20,24 +20,33 @@
         </div>
     </header>
     
-    <div class="container text-white bg-dark block">
-        <div class="row justify-content-center block">
-            <div class="col-sm-6 ">
-                <div class="row d-flex justify-content-center">
-                    <h2 id="zagalovok" class="row text-white d-flex justify-content-center" >Шифровать</h2>
-                    <br>
-                    <label for='nickname' class='form-label' id='cryptographer-text'><h5 class=" text-white row d-flex justify-content-center">Выберете файл размером не более 1Гб, который вы хотите зашифровать</h5></label>
-                    <input type="file" class='form-control ' id='cryptographer'>
-                    <input type="button" class='btn btn-dark' id='cryptographer-btn' value='Шифровать'>
-                    <br>
-                    <h2 id="zagalovok" class="row text-white d-flex justify-content-center">Дешифровать</h2>
-                    <br>
-                    <label for='nickname' class='form-label' id='codebreaker-text'><h5 class=" text-white row d-flex justify-content-center">Выберете файл размером не более 1Гб , который хотите дешифровать</h5></label>
-                    <input type="file" class='form-control' id='codebreaker'>
-                    <input type="button" class='btn btn-dark' id='codebreaker-btn' value='Дешифровать'>
+    <div class="container text-white block">
+        <!-- <div class="row justify-content-center block">
+            <div class="col-sm-6 "> -->
+                <div class="row d-flex  justify-content-center block">
+                    <div class="col-sm-12 encrypted-col">
+                        <h2 id="zagalovok" class="row text-white d-flex justify-content-center">Шифровать</h2>
+                        <br>
+                        <label for='nickname' class='form-label' id='cryptographer-text'>
+                            <h5 class=" text-white row d-flex justify-content-center">Выберете файл размером не более 1Гб, который вы хотите
+                                зашифровать</h5>
+                        </label>
+                        <input type="file" class='form-control ' id='cryptographer'>
+                        <input type="button" class='btn btn-dark' id='cryptographer-btn' value='Шифровать'>
+                        <br>
+                        <h2 id="zagalovok" class="row text-white d-flex justify-content-center">Дешифровать</h2>
+                        <br>
+                        <label for='nickname' class='form-label' id='codebreaker-text'>
+                            <h5 class=" text-white row d-flex justify-content-center">Выберете файл размером не более 1Гб , который хотите
+                                дешифровать</h5>
+                        </label>
+                        <input type="file" class='form-control' id='codebreaker'>
+                        <input type="button" class='btn btn-dark' id='codebreaker-btn' value='Дешифровать'>
+                    </div>
                 </div>
-            </div>
-        </div>
+            <!-- </div>
+        </div> -->
+    </div>    
     
 {% endblock %}
 {% block js %}

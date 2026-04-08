@@ -106,16 +106,21 @@ obsh {
 p {
     color: #ffffff;
 }
-
-/* .absolut{
-    right: 0;
-    position: absolute;
-    color: #ffffff;
-} */
+h5{
+    line-height: 1.8rem;
+}
 
 .block{
     background: #000000;
-    color: #000000;    
+    color: #000000;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.encrypted-col{
+    width: 70%;
 }
 #sc{
     background-color: rgba(0, 0, 0, 0.0);
@@ -131,4 +136,11 @@ p {
 }
 .modal-dialog{
     margin-top: 10rem;
+}
+.error-plaseholder::plaseholder{
+    width: 0px;
+    color:red !important;
+}
+#password-examination:focus{
+    border-color: #ced4da
 }
