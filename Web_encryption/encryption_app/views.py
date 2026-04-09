@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from django.http import JsonResponse,FileResponse
+from django.http import JsonResponse, HttpResponse,FileResponse
 from django.views.decorators.csrf import csrf_exempt
 from cryptography.fernet import Fernet
 from django.urls import reverse
@@ -144,7 +144,7 @@ def codebreaker(request):
 @csrf_exempt
 def index(request):
     try:
-        context = {'username': request.user.username}
+        context = {'username': request.user.username,'email' : request.user.email}
         return render(request,"index.html",context)    
     except AttributeError as e:
         return render(request,"index.html")
@@ -187,17 +187,26 @@ def logout_view(request):
     return redirect('index')
 
 def account(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        nickname = request.POST.get('nickname')
-        username = nickname       
-        # print("Ник: ",username,'\n',"Пароль: ",password,"Почта",email,'\n',"Код",cod_email,'\n',"Пароль проверка",password_proverka,sep='')
-        return JsonResponse({'status':'success'})
-    
-    print(request.user.id)
-    context = {
-        # 'username' : request.user.username,
-        # 'email' : request.user.email,
-    }
-    return render(request, 'account.html',context, status=418)
+    # if request.method == 'POST':
+    #     email = request.POST.get('email')
+    #     password = request.POST.get('password')
+    #     nickname = request.POST.get('nickname')
+    #     username = nickname       
+    #     # print("Ник: ",username,'\n',"Пароль: ",password,"Почта",email,'\n',"Код",cod_email,'\n',"Пароль проверка",password_proverka,sep='')
+    #     return JsonResponse({'status':'success'})
+        # print(request.user.id)
+        # context = {
+        #     # 'username' : request.user.username,
+        #     # 'email' : request.user.email,
+        # }
+        # return render(request, 'account.html',context, status=418)
+    try:
+        context = {
+            'username' : request.user.username,
+            'first_name' : request.user.first_name,
+            'last_name' : request.user.last_name,
+            'email' : request.user.email,
+        }
+        return render(request, 'account.html', context)
+    except AttributeError:
+        return HttpResponse("<h1>401 Unauthorized</h1>", status=401)

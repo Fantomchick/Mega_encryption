@@ -1,12 +1,15 @@
 .card {
-    border-radius: 0px;
+    border-radius: 25px;
     /* border-color: rgb(241, 239, 230); */
     border-style: solid;
     padding: 5px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     background-color: rgb(34, 40, 49);
 }
-
+.modal-content{
+    border-radius: 25px;
+    background-color: rgb(34, 40, 49);
+}
 #obsh {
     align-items: center;
 }
@@ -27,27 +30,15 @@ p {
     color:rgb(255, 255, 255);
     text-decoration:none;
 }
-
-/* .absolut {
-    right: 0;
-    position: absolute;
-    color: #ffffff;
+#auth-btn:hover {
+    text-decoration: underline
 }
 
-.navbar {
-    right: 0;
-    position: absolute;
-    color: #ffffff;
-} */
+#auth-btn:active {
+    color: coral
+}
 
-@media screen and (max-width: 600px) {
-    header {
-        height: 15rem;
-    }
-    interesting-text{
-
-    }
-    interesting-title{
-        
-    }
+#auth-btn {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }

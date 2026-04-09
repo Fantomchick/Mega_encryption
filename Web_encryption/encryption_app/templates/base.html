@@ -17,11 +17,8 @@
     <link rel="stylesheet" href={%static 'css/footer.css' %}>
     <link rel='icon' href={%static 'faicon.png' %}>
     </link>
-    <link rel="stylesheet" href={%static 'css/auth.css' %}>
+    <link rel="stylesheet" href={%static 'css/reg-auth.css' %}>
     </link>
-    <link rel="stylesheet" href={%static 'css/reg.css' %}>
-    </link>
-    <link rel="stylesheet" href={% static 'css/account.css' %}>
     {% block css %}{% endblock %}
     <!-- <link rel="stylesheet" href={% static 'css/footer.css' %}> -->
 </head>
@@ -34,25 +31,20 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="card text-white">
-                    <h1>Настройки профиля</h1>
+                    <h1 class="obsh">Настройки профиля</h1>
                     <!-- Пароль -->
-                    <label for="password" class="form-label reg-label">Введите новый пароль, если хотите его изменить или
-                        введите старый</label>
-                    <input type="password" class="form-control" id="password_account" placeholder="Введите пароль"
-                        value="{{ password }}">
+                    <label for="password" class="form-label reg-label">Введите новый пароль, если хотите поменять</label>
+                    <input type="password" class="form-control" id="password_account" placeholder="Введите пароль" value="{{ password }}">
                     <!-- Имя -->
-                    <label for="first-name" class="form-label">Введите новый ник, если хотите его изменить или введите
-                        старый</label>
-                    <input type="text" class="form-control" id="nickname_account"" placeholder=" Введите ник"
-                        value="{{ nickname }}">
+                    <!-- <label for="first-name" class="form-label">Введите новый ник, если хотите его изменить</label>
+                    <input type="text" class="form-control" id="nickname_account"  value="{{ nickname }}"> -->
                     <!-- Почта -->
                     <label for="email" class="form-label reg-label">Электронная почта</label>
-                    <input type="email" class="form-control" id="email_account"" placeholder=" Введите почту и ждите код для
-                        потверждения" value="{{ email }}">
+                    <input type="email" class="form-control" id="email_account" value="{{ email }}">
                     <label for='nickname' class='form-label' id='cod-email-label'>Введите код с полученого сообщения</label>
-                    <input type="text" class='form-control ' id='cod-email_account"' value='Fantom'>
+                    <input type="text" class='form-control ' id='cod-email_account" value='Fantom'>
                     <!-- Кнопка регистрации -->
-                    <input type="button" class="btn btn-dark" id="save-button" value="Изменить">
+                    <input type="button" class="btn-top btn btn-dark" id="save-button" value="Изменить">
                 </div>
             </div>
         </div>
@@ -62,14 +54,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="card text-white">
-                    <h2 class="row justify-content-center" id='obsh'>ВХОД</h2>
+                    <h2 class="obsh row justify-content-center ">ВХОД</h2>
                     <label for='nickname' class='form-label' id='nickname-label'>Введите свой ник или нажмите <a
                             id='reg-link' href="{%url 'account'%}">сюда</a>, если забыли его</label>
                     <input type="text" class='form-control ' id='nickname_auth' value='Fantom'>
                     <label for='password' class='form-label' id='password-label'>Введите свой пароль или нажмите <a
                             id='reg-link' href="{%url 'account'%}">сюда</a>, если забыли его</label>
                     <input type="password" class='form-control ' id='password_auth' value='111fefefefef'>
-                    <input type="button" class='btn btn-dark' id='auth-btn' value='Войти'>
+                    <input type="button" class='btn-top btn btn-dark' id='auth-btn' value='Войти'>
                     <!-- <p>Ещё не зарегистрированы ? Тогда нажмите <a id='reg-link' href="{%url 'reg'%}">сюда,</a> чтобы
                                                     зарегистрироваться</p> -->
                 </div>
@@ -81,7 +73,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="card text-white ">
-                    <h2 class="row justify-content-center" id='obsh'>РЕГИСТРАЦИЯ</h2>
+                    <h2 class="obsh row justify-content-center">РЕГИСТРАЦИЯ</h2>
                     <label for='nickname' class='form-label' id='email-label'>Введите почту</label>
                     <input type="email" class='form-control ' id='email' value='Fantom@yandex.ru'>
                     <!-- <label for='nickname' class='form-label' id='cod-email-label'>Введите код с полученого сообщения</label>
@@ -92,7 +84,7 @@
                     <input type="password" class='form-control ' id='password' value='111fefefefef'>
                     <label for='password' class='form-label' id='password-examination-label'>Повторите пароль</label>
                     <input type="password" class='form-control ' id='password-examination' value='111fefefefef'>
-                    <input type="button" class='btn btn-dark' id='reg-btn' value='Зарегистрироваться'>
+                    <input type="button" class='btn-top btn btn-dark' id='reg-btn' value='Зарегистрироваться'>
                 </div>
             </div>
         </div>
