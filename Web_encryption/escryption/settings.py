@@ -24,6 +24,17 @@ SECRET_KEY = 'django-insecure-s%(59*-p3cv!cm)saz(d%afn#ijz8lg4gk6usd$$1nybj4_9%l
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#Тест прогры
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#код нужный для работты почты
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587#порт яндекса 465
+# EMAIL_USE_SSL = True
+# EMAIL_HOST_USER = 'iskkab2000@gmail.com'
+# EMAIL_HOST_PASSWORD = 'код-пароля-приложения'
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 ALLOWED_HOSTS = []
 
