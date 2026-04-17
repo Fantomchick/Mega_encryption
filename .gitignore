@@ -3,3 +3,5 @@ Web_encryption/encryption_app/__pycache__/
 Web_encryption/media/
 Web_encryption/encryption_app/migrations/__pycache__/
 Web_encryption/escryption/__pycache__/
+Web_encryption/encryption_app/migrations/__pycache__/
+Web_encryption/media/crypto_files/

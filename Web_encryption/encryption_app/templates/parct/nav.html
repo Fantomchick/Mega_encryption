@@ -1,0 +1,43 @@
+{% load static %}
+<nav class="navbar navbar-expand-xl navbar-dark bg-transparent">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarWithDropdown">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " id="navbarWithDropdown">
+
+            <ul class="navbar-nav ms-auto">
+                {%if username %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href={% url 'index' %}>Главная</a>
+                </li>    
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="sc" href='' data-bs-toggle="dropdown">{{username}}</a>
+                    <ul class="dropdown-menu bg-dark">
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-dark text-white " data-bs-toggle="modal" data-bs-target="#account"
+                                data-bs-whatever="@mdo">В аккаунт</button>
+                        </li>
+                        <li><a class="dropdown-item text-white " id='logout-link' href={%url 'logout' %}>Выйти</a></li>
+                    </ul>
+                </li>
+                {%else%}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href={% url 'index' %}>Главная</a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-link btn btn-dark text-white ar" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdo">Войти</button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-link btn btn-dark text-white ar" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                        data-bs-whatever="@mdo">Зарегистрироваться</button>
+                </li>
+                {%endif%}
+            </ul>
+        </div>
+    </div>
+
+</nav>

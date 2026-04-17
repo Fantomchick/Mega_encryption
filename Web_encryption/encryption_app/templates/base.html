@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mega-encryption{% endblock %}</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Font Awesome подключение -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href={%static 'css/footer.css' %}>
+    <link rel='icon' href={%static 'faicon.png' %}>
+    </link>
+    <link rel="stylesheet" href={%static 'css/reg-auth.css' %}>
+    </link>
+    {% block css %}{% endblock %}
+    <!-- <link rel="stylesheet" href={% static 'css/footer.css' %}> -->
+</head>
+
+<body>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+        <div class="modal fade" id="account" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="card text-white">
+                    <h1 class="obsh">Настройки профиля</h1>
+                    <!-- Пароль -->
+                    <label for="password" class="form-label reg-label">Введите новый пароль, если хотите поменять</label>
+                    <input type="password" class="form-control" id="password_account" placeholder="Введите пароль" value="{{ password }}">
+                    <!-- Имя -->
+                    <!-- <label for="first-name" class="form-label">Введите новый ник, если хотите его изменить</label>
+                    <input type="text" class="form-control" id="nickname_account"  value="{{ nickname }}"> -->
+                    <!-- Почта -->
+                    <label for="email" class="form-label reg-label">Электронная почта</label>
+                    <input type="email" class="form-control" id="email_account" value="{{ email }}">
+                    <label for='nickname' class='form-label' id='cod-email-label'>Введите код с полученого сообщения</label>
+                    <input type="text" class='form-control ' id='cod-email_account" value='Fantom'>
+                    <!-- Кнопка регистрации -->
+                    <input type="button" class="btn-top btn btn-dark" id="save-button" value="Изменить">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="card text-white">
+                    <h2 class="obsh row justify-content-center ">ВХОД</h2>
+                    <label for='nickname' class='form-label' id='nickname-label'>Введите свой ник или нажмите <a
+                            id='reg-link' href="{%url 'account'%}">сюда</a>, если забыли его</label>
+                    <input type="text" class='form-control ' id='nickname_auth' value='Fantom'>
+                    <label for='password' class='form-label' id='password-label'>Введите свой пароль или нажмите <a
+                            id='reg-link' href="{%url 'account'%}">сюда</a>, если забыли его</label>
+                    <input type="password" class='form-control ' id='password_auth' value='111fefefefef'>
+                    <input type="button" class='btn-top btn btn-dark' id='auth-btn' value='Войти'>
+                    <!-- <p>Ещё не зарегистрированы ? Тогда нажмите <a id='reg-link' href="{%url 'reg'%}">сюда,</a> чтобы
+                                                    зарегистрироваться</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="card text-white ">
+                    <h2 class="obsh row justify-content-center">РЕГИСТРАЦИЯ</h2>
+                    <label for='nickname' class='form-label' id='email-label'>Введите почту</label>
+                    <input type="email" class='form-control ' id='email' value='Fantom@yandex.ru'>
+                    <!-- <label for='nickname' class='form-label' id='cod-email-label'>Введите код с полученого сообщения</label>
+                                            <input type="text" class='form-control ' id='cod-email' value='Fantom'> -->
+                    <label for='nickname' class='form-label' id='nickname-label'>Придумайте ник для регистрации</label>
+                    <input type="text" class='form-control ' id='nickname' value='Fantom'>
+                    <label for='password' class='form-label' id='password-label'>Придумайте пароль для регистрации</label>
+                    <input type="password" class='form-control ' id='password' value='111fefefefef'>
+                    <label for='password' class='form-label' id='password-examination-label'>Повторите пароль</label>
+                    <input type="password" class='form-control ' id='password-examination' value='111fefefefef'>
+                    <input type="button" class='btn-top btn btn-dark' id='reg-btn' value='Зарегистрироваться'>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'parct/footer.html' %}
+    
+    <!-- jQuery 3.7.1 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Bootstrap 5.3 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src={% static 'js/reg.js' %}></script>
+    <script src={% static 'js/auth.js' %}></script>
+    <script src={% static 'js/height.js' %}></script>
+    {% block js %}{% endblock %}
+</body>
+
+</html>

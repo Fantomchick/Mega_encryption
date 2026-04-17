@@ -4,8 +4,19 @@ $('#reg-btn').click(
         let password = $('#password').val()
         let email = $('#email').val()
         let codEmail = $('#cod-email').val()
-        let passwordProverka = $('#password-proverka').val()
         let regButton = $('#reg-btn')
+        let passwordExamination = $('#password-examination').val()
+        if (password !== passwordExamination){
+            $('#password-examination').val('');
+            $('#password-examination').attr('placeholder', 'Пароли не совпадают');
+            $('#password-examination').css({
+                'border': '1px solid red',
+                'transtion': '0.3s',
+            });
+            $('#password-examination').addClass('error-plaseholder')
+            return
+        }
+
         const CSRF = $('[name=csrfmiddlewaretoken]').val()
 
         let userData = {
@@ -13,7 +24,6 @@ $('#reg-btn').click(
             'password': password,
             'email': email,
             'codemail': codEmail,
-            'passwordproverka': passwordProverka,
             'csrfmiddlewaretoken': CSRF
         }
         $.ajax({

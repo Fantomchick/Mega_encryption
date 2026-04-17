@@ -1,12 +1,11 @@
 header {
-    background: linear-gradient(45deg, orange 30%, violet);
+    /* background: linear-gradient(45deg, orange 30%, violet); */
     background-image: url('../fon.jpeg');
     height: 30rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
-
 .ki-header-title {
     display: flex;
     align-items: center;
@@ -19,6 +18,7 @@ header {
 }
 
 .roboto-italic {
+    text-align: center;
     font-family: "Roboto", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -35,13 +35,42 @@ header {
 }
 
 /* Мобильная версия */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1199.98px) {
     header {
         height: 15rem;
     }
-    interesting-text {}
+    .navbar-collapse {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1040; 
+        
+        background-color: rgba(0, 0, 0, 0.95); 
+        padding: 70px 20px 20px;
+        border-bottom: 1px solid #444;
+    }
 
-    interesting-title {}
+    .nav-link{
+        width: 100%;
+        text-align: right;
+        padding: 10px 0;
+    }
+    
+    
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .navbar-toggler{
+        position: relative;
+        z-index: 1050;
+
+    }
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3E%3Cpath d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    }
 }
 .auth {
     margin-left: 2rem;
@@ -66,21 +95,54 @@ body {
     background-color: black;
 }
 
-#nav-login {
-    background-color: black;
-}
 
-obsh {
-    align-items: center;
-}
 
 p {
     color: #ffffff;
 }
+.btn-top{
+    margin-top: 1rem;
+    width: 100%;
+}
+.top{
+    margin-top: 2rem;
 
-#nav{
-    right: 0;
+}
+h5{
+    line-height: 2rem;
+}
 
-    position: absolute;
-    color: #ffffff;
+.block{
+    background: #000000;
+    color: #000000;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.encrypted-col{
+    width: 70%;
+}
+#sc{
+    background-color: rgba(0, 0, 0, 0.0);
+    border: none;
+    background-color: transparent;
+}
+.ar{
+    background-color: rgba(0, 0, 0, 0.0);
+    border: none;
+}
+#footer{
+    margin-top: 1rem;
+}
+.modal-dialog{
+    margin-top: 10rem;
+}
+.error-plaseholder::plaseholder{
+    width: 0px;
+    color:red !important;
+}
+#password-examination:focus{
+    border-color: #ced4da
 }
